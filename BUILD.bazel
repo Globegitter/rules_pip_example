@@ -1,0 +1,23 @@
+load("@com_apt_itude_rules_pip//rules:compile.bzl", "compile_pip_requirements")
+
+PY3_PATH = "/usr/bin/python3"
+
+compile_pip_requirements(
+    name = "pip-compile",
+    requirements_in = "requirements.in",
+    requirements_txt = "requirements.txt",
+    python_interpreter = PY3_PATH,
+)
+
+
+py_runtime(
+    name = "py_runtime",
+    interpreter_path = select({
+        # Until python rules have proper toolchain support we have to provide hardcoded paths
+        # to the python interpreters here
+        "@bazel_tools//tools/python:PY2": "/usr/bin/python2",
+        "@bazel_tools//tools/python:PY3": PY3_PATH,
+    }),
+    files = [],
+    visibility = ["//visibility:public"],
+)

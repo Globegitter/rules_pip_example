@@ -1,0 +1,2 @@
+build --python_top=//:py_runtime
+test --test_output=all
