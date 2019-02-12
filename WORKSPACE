@@ -17,4 +17,5 @@ pip_repository(
     name = "py3_deps",
     requirements = "//:requirements.txt",
     python_interpreter = PY3_PATH,
+    wheel_cache = "~/.cache/bazel/wheels"
 )
