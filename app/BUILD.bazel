@@ -1,6 +1,5 @@
 # load("@io_bazel_rules_docker//python3:image.bzl", "py3_image")
-# load("@com_apt_itude_rules_pip//tools/pytest:rules.bzl", "pytest_test")
-load("//tools/pytest:rules.bzl", "pytest_test")
+load("//:py.bzl", "pytest3_test")
 
 py_library(
     name = "handler",
@@ -31,7 +30,7 @@ py_binary(
 #     python_version = "PY3",
 # )
 
-pytest_test(
+pytest3_test(
     name = "app_test",
     src = "app_test.py",
     deps = [
@@ -39,7 +38,5 @@ pytest_test(
         ":handler",
         "@py3_deps//aiohttp",
         "@py3_deps//pytest_aiohttp",
-        # "@py3_deps//pytest",
     ],
-    python_version = "PY3",
 )
